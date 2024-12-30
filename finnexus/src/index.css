@@ -1,0 +1,65 @@
+/* Reset some default browser styles */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  background-color: #001f3f; /* Navy background */
+  color: #ffffff; /* Default white text for contrast */
+}
+
+/* Global button styles */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Ensure consistent layout */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Add global styles for headers and paragraphs */
+h1, h2, h3 {
+  margin: 10px 0;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* Add custom styles for quiz and navigation */
+.quiz-container {
+  background-color: #003366; /* Navy background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-container button {
+  margin: 10px 5px;
+  background-color: #FFD700; /* Yellow buttons */
+  color: #003366; /* Contrasting text */
+}
+
+.quiz-container button:hover {
+  background-color: #FFC300; /* Slightly lighter yellow on hover */
+}
