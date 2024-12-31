@@ -2,215 +2,128 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Level1Quiz: React.FC = () => {
-  const navigate = useNavigate();
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [currentQuestion, setCurrentQuestion] = useState<number>(0);
-  const [score, setScore] = useState<number>(0);
-  const [quizFinished, setQuizFinished] = useState<boolean>(false);
+  const [score, setScore] = useState(0);
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  const [answeredQuestions, setAnsweredQuestions] = useState<boolean[]>(new Array(5).fill(false));
+
+  const navigate = useNavigate();
 
   const questions = [
-    {
-      question: 'What is the primary purpose of a savings account?',
-      options: ['To earn high returns', 'To keep your money safe and earn interest', 'To make large investments', 'To spend money quickly'],
-      answer: 'To keep your money safe and earn interest',
-    },
-    {
-      question: 'Which of the following is an example of an investment?',
-      options: ['Buying a new phone', 'Buying stocks in a company', 'Paying for a subscription service', 'Purchasing groceries'],
-      answer: 'Buying stocks in a company',
-    },
-    {
-      question: 'What is a budget?',
-      options: ['A plan for how to spend and save money', 'A type of bank account', 'A financial statement for a company', 'A loan from the bank'],
-      answer: 'A plan for how to spend and save money',
-    },
-    {
-      question: 'What does "credit score" represent?',
-      options: ['How much money you have in the bank', 'Your ability to borrow money', 'The interest rates on your savings', 'The total amount of your income'],
-      answer: 'Your ability to borrow money',
-    },
-    {
-      question: 'What is the difference between a debit card and a credit card?',
-      options: ['A debit card lets you borrow money, while a credit card doesn’t', 'A debit card uses your own money, while a credit card allows borrowing money', 'Debit cards are used for online shopping, while credit cards are not', 'There is no difference'],
-      answer: 'A debit card uses your own money, while a credit card allows borrowing money',
-    },
+    { question: 'What is a budget?', options: ['A list of income sources', 'A list of expenses', 'A plan for income and expenses', 'None of the above'], correctAnswer: 'A plan for income and expenses' },
+    { question: 'What is a savings account?', options: ['An account for spending', 'An account for saving money', 'An account for investments', 'An account for loans'], correctAnswer: 'An account for saving money' },
+    { question: 'What is an investment?', options: ['A way to save money', 'A way to make money grow over time', 'A way to earn interest on savings', 'A way to borrow money'], correctAnswer: 'A way to make money grow over time' },
+    { question: 'What is an interest rate?', options: ['The rate at which you save money', 'The amount of money you can borrow', 'The percentage charged on a loan or earned on savings', 'The rate at which your salary increases'], correctAnswer: 'The percentage charged on a loan or earned on savings' },
+    { question: 'What is a credit score?', options: ['A number that represents your income', 'A number that represents your creditworthiness', 'A number that represents your savings', 'A number that represents your loan history'], correctAnswer: 'A number that represents your creditworthiness' },
   ];
 
+  const handleAnswerChange = (event: React.ChangeEvent<HTMLInputElement>, option: string) => {
+    setSelectedAnswer(option);
+  };
+
   const handleNext = () => {
-    if (selectedAnswer === questions[currentQuestion].answer) {
+    if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
       setScore(score + 1);
     }
+    const updatedAnsweredQuestions = [...answeredQuestions];
+    updatedAnsweredQuestions[currentQuestionIndex] = true;
+    setAnsweredQuestions(updatedAnsweredQuestions);
 
-    setSelectedAnswer(null);
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedAnswer(null);
     } else {
-      setQuizFinished(true);
+      setQuizCompleted(true);
     }
   };
 
   const handlePrevious = () => {
-    setSelectedAnswer(null);
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+      setSelectedAnswer(null);
     }
   };
 
-  const handleAnswerSelection = (answer: string) => {
-    setSelectedAnswer(answer);
-  };
-
   const handleTryAgain = () => {
-    setQuizFinished(false);
     setScore(0);
-    setCurrentQuestion(0);
+    setCurrentQuestionIndex(0);
+    setQuizCompleted(false);
+    setAnsweredQuestions(new Array(5).fill(false));
   };
 
-  const handleProceed = () => {
+  const handleUnlockNextLevel = () => {
     if (score >= 4) {
-      alert('Congrats! Unlocks to Level 2!');
-      // Navigate to Level 2
-      navigate('/Level2/video');
+      // Navigate to Level2Video when score is sufficient
+      navigate('/FinEducation');
     } else {
-      alert('You need a score of 4/5 to proceed to the next level.');
+      alert('Your score is not enough to unlock the next level.');
     }
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        backgroundColor: '#001f3f', // Navy background
-        color: '#FFD700', // Yellow text color for contrast
-      }}
-    >
-      <div
-        style={{
-          padding: '20px',
-          width: '400px',
-          border: '2px solid #FFD700', // Border color to match the yellow theme
-          borderRadius: '10px',
-          backgroundColor: '#ffffff',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Shadow for some depth
-        }}
-      >
-        {!quizFinished ? (
+    <div style={{ backgroundColor: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      <div style={{ backgroundColor: '#333', padding: '20px', borderRadius: '10px', width: '60%', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }}>
+        {!quizCompleted ? (
           <>
-            <h2 style={{ color: '#000000', fontSize: '24px' }}>Question {currentQuestion + 1}</h2>
-            <p style={{ color: '#000000', fontSize: '22px', fontWeight: 'bold' }}>
-              {questions[currentQuestion].question}
-            </p>
-
-            <div style={{ marginBottom: '20px' }}>
-              {questions[currentQuestion].options.map((option, index) => (
-                <div key={index}>
-                  <button
-                    onClick={() => handleAnswerSelection(option)}
-                    style={{
-                      padding: '10px 20px',
-                      marginBottom: '10px',
-                      backgroundColor:
-                        selectedAnswer === option ? '#FFD700' : '#001f3f',
-                      color: selectedAnswer === option ? '#001f3f' : '#FFD700',
-                      border: '2px solid #FFD700', // Border color
-                      borderRadius: '5px',
-                      fontSize: '16px',
-                      cursor: 'pointer',
-                      width: '100%',
-                    }}
-                  >
+            <div style={{ fontSize: '18px', color: '#fff', marginBottom: '20px' }}>
+              <strong>Question {currentQuestionIndex + 1} of {questions.length}</strong>
+            </div>
+            <div style={{ fontSize: '18px', marginBottom: '20px', color: '#fff' }}>
+              <strong>{questions[currentQuestionIndex].question}</strong>
+            </div>
+            <div>
+              {questions[currentQuestionIndex].options.map((option, index) => (
+                <div
+                  key={index}
+                  style={{
+                    marginBottom: '10px',
+                    border: '1px solid #555',
+                    borderRadius: '5px',
+                    padding: '10px',
+                    backgroundColor: selectedAnswer === option ? '#4CAF50' : '#444',
+                    color: selectedAnswer === option ? '#fff' : '#fff',
+                  }}
+                >
+                  <input
+                    type="radio"
+                    id={`option${index}`}
+                    name="answer"
+                    value={option}
+                    checked={selectedAnswer === option}
+                    onChange={(e) => handleAnswerChange(e, option)}
+                    style={{ marginRight: '10px' }}
+                  />
+                  <label htmlFor={`option${index}`} style={{ fontSize: '16px', color: '#fff' }}>
                     {option}
-                  </button>
+                  </label>
                 </div>
               ))}
             </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <button
-                onClick={handlePrevious}
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: '#FFD700',
-                  color: '#001f3f',
-                  border: 'none',
-                  borderRadius: '5px',
-                  fontSize: '16px',
-                  cursor: 'pointer',
-                }}
-              >
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+              <button onClick={handlePrevious} disabled={currentQuestionIndex === 0} style={{ padding: '10px 20px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '5px', cursor: currentQuestionIndex === 0 ? 'not-allowed' : 'pointer' }}>
                 Previous
               </button>
-              <button
-                onClick={handleNext}
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: '#FFD700',
-                  color: '#001f3f',
-                  border: 'none',
-                  borderRadius: '5px',
-                  fontSize: '16px',
-                  cursor: 'pointer',
-                }}
-              >
-                Next
+              <button onClick={handleNext} disabled={selectedAnswer === null} style={{ padding: '10px 20px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '5px', cursor: selectedAnswer === null ? 'not-allowed' : 'pointer' }}>
+                {currentQuestionIndex === questions.length - 1 ? 'Finish' : 'Next'}
               </button>
             </div>
           </>
         ) : (
           <div style={{ textAlign: 'center' }}>
-            <h2 style={{ color: '#000000', fontSize: '24px' }}>Your Score</h2>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: '#FFD700',
-                color: '#001f3f',
-                width: '150px',
-                height: '150px',
-                borderRadius: '50%',
-                fontSize: '36px',
-                fontWeight: 'bold',
-                margin: '20px auto',
-              }}
-            >
-              {score}/5
+            <h3 style={{ color: '#fff' }}>Quiz Completed!</h3>
+            <p style={{ color: '#fff' }}>You completed {questions.length} questions.</p>
+            <div style={{ backgroundColor: '#4CAF50', width: '100px', height: '100px', borderRadius: '50%', margin: '20px auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <span style={{ color: '#fff', fontSize: '24px' }}>
+                <span style={{ fontSize: '28px', fontWeight: 'bold' }}>{score}</span> / 
+                <span style={{ fontSize: '28px', fontWeight: 'bold' }}> {questions.length}</span>
+              </span>
             </div>
-
-            {score >= 4 ? (
-              <button
-                onClick={handleProceed} // Proceed to the next level if the score is >= 4
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: '#FFD700',
-                  color: '#001f3f',
-                  border: 'none',
-                  borderRadius: '5px',
-                  fontSize: '16px',
-                  cursor: 'pointer',
-                }}
-              >
-                Congrats! Unlocks to Level 2!
-              </button>
-            ) : (
-              <button
-                onClick={handleTryAgain} // Try Again button if score is less than 4
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: '#FFD700',
-                  color: '#001f3f',
-                  border: 'none',
-                  borderRadius: '5px',
-                  fontSize: '16px',
-                  cursor: 'pointer',
-                }}
-              >
-                Try Again
-              </button>
-            )}
+            <p style={{ color: '#fff' }}>You answered {score} out of {questions.length} questions correctly.</p>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+              <button onClick={handleTryAgain} style={{ padding: '10px 20px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Try Again</button>
+              <button onClick={handleUnlockNextLevel} style={{ padding: '10px 20px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Unlock to Next Level</button>
+            </div>
           </div>
         )}
       </div>

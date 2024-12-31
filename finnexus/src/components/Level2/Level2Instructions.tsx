@@ -1,98 +1,110 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Level2Instructions: React.FC = () => {
-  const [isAgreed, setIsAgreed] = useState(false);
+  const navigate = useNavigate();
+  const [isAgreed, setIsAgreed] = useState(false); // Track checkbox state
 
-  const handleAgreeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsAgreed(event.target.checked);
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsAgreed(event.target.checked); // Update the agreed state
+  };
+
+  const handleProceedClick = () => {
+    if (isAgreed) {
+      navigate('/Level2/quiz'); // Proceed to quiz page if checkbox is checked
+    } else {
+      alert('You must agree to the instructions first.');
+    }
   };
 
   return (
     <div
       style={{
-        textAlign: 'center',
+        backgroundColor: 'white', // White background for the whole page
+        color: 'black',            // Black text color for overall page
+        minHeight: '100vh',        // Full screen height
+        display: 'flex',           // Flexbox for centering
+        flexDirection: 'column',  // Column layout
+        justifyContent: 'center', // Center content vertically
+        alignItems: 'center',     // Center content horizontally
+        fontFamily: 'Arial, sans-serif',
         padding: '20px',
-        backgroundColor: '#001f3f', // Navy background
-        color: '#FFD700', // Yellow text color
-        height: '100vh', // Full viewport height to center the content
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
       }}
     >
-      <h1>Level 2 - Instructions</h1>
-
-      {/* Instructions Box */}
+      {/* Main container with black background */}
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          textAlign: 'left',
-          marginBottom: '20px',
-          padding: '10px',
+          backgroundColor: 'black',  // Black background for the container
+          color: 'white',            // White text inside the container
+          width: '80%',
+          maxWidth: '800px',
+          padding: '30px',
           borderRadius: '8px',
-          backgroundColor: '#ffffff', // White background for the instructions box
-          color: '#001f3f', // Navy text color for the instructions box
-          width: '60%',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          border: '5px solid #FFD700', // Yellow border
+          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
         }}
       >
-        <h3 style={{ fontSize: '20px', marginBottom: '15px' }}>Instructions:</h3>
-        <ul style={{ listStyleType: 'decimal', paddingLeft: '20px' }}>
-          <li>Watch the video carefully.</li>
-          <li>Answer the quiz questions after the video.</li>
-          <li>Follow the instructions to complete the task.</li>
-          <li>Each question has only one correct answer.</li>
-          <li>Click 'Next' to proceed after answering each question.</li>
-        </ul>
-      </div>
+        <h2 style={{ fontSize: '36px' }}>Level 2 - Instructions</h2> {/* White title text */}
 
-      {/* Agreement Checkbox */}
-      <div>
-        <input
-          type="checkbox"
-          id="agree"
-          onChange={handleAgreeChange}
-          checked={isAgreed}
-          style={{ marginRight: '10px' }}
-        />
-        <label htmlFor="agree">I have read and understood the instructions.</label>
-      </div>
-
-      {/* Proceed Button */}
-      <div style={{ marginTop: '20px' }}>
-        <Link to="/Level2/quiz">
-          <button
-            onClick={(e) => {
-              if (!isAgreed) {
-                e.preventDefault(); // Prevent navigation if not agreed
-              }
-            }}
-            disabled={!isAgreed}
+        {/* Instructions Content */}
+        <div
+          style={{
+            width: '100%',
+            marginBottom: '20px',
+          }}
+        >
+          <ul
             style={{
-              padding: '8px 16px', // Small padding for a compact button
-              backgroundColor: isAgreed ? '#FFD700' : '#aaa', // Grey out if disabled
-              color: isAgreed ? '#001f3f' : '#666',
-              border: 'none',
-              borderRadius: '5px',
-              fontSize: '14px', // Smaller font size
-              cursor: isAgreed ? 'pointer' : 'not-allowed',
-              width: 'auto', // Ensure the button is not stretched
-              display: 'inline-block', // Keep the button compact
+              listStyleType: 'decimal',
+              marginBottom: '20px',
+              fontSize: '18px',
+              color: 'white',
+              paddingLeft: '20px', // Added padding for a cleaner look
             }}
+          >
+            <li style={{ marginBottom: '15px' }}>Understand the budgeting concepts before starting.</li>
+            <li style={{ marginBottom: '15px' }}>Watch the video content carefully to get the full understanding of the topic.</li>
+            <li style={{ marginBottom: '15px' }}>Take notes during the video, as it will help you with the quiz.</li>
+            <li style={{ marginBottom: '15px' }}>Focus on the key points highlighted in the video.</li>
+            <li style={{ marginBottom: '15px' }}>Be sure to understand each section before proceeding to the next one.</li>
+            <li style={{ marginBottom: '15px' }}>If you need help, feel free to revisit the video and instructions.</li>
+            <li style={{ marginBottom: '15px' }}>Once you feel confident, proceed to the quiz and test your knowledge.</li>
+          </ul>
+
+          {/* Checkbox to Agree */}
+          <div style={{ marginTop: '20px' }}>
+            <label style={{ color: 'white' }}>
+              <input
+                type="checkbox"
+                checked={isAgreed}
+                onChange={handleCheckboxChange}
+                style={{
+                  marginRight: '10px',
+                  cursor: 'pointer',
+                }}
+              />
+              I agree to the instructions above
+            </label>
+          </div>
+
+          {/* Proceed Button */}
+          <button
+            onClick={handleProceedClick}
+            style={{
+              padding: '8px 15px', // Reduced padding
+              backgroundColor: isAgreed ? '#007BFF' : '#cccccc', // Blue if agreed, gray if not
+              color: 'white',
+              border: '2px solid white', // White border
+              borderRadius: '5px',
+              cursor: isAgreed ? 'pointer' : 'not-allowed',
+              fontSize: '16px', // Increased font size for the button
+              marginTop: '20px',
+              width: 'auto', // Adjust width to fit content
+            }}
+            disabled={!isAgreed} // Disable if checkbox is not checked
           >
             Proceed to Quiz
           </button>
-        </Link>
-      </div>
-
-      {/* Best of Luck Message */}
-      <div style={{ marginTop: '40px', fontSize: '20px', fontWeight: 'bold' }}>
-        <p>Best of Luck! You've got this!</p>
+        </div>
       </div>
     </div>
   );

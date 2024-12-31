@@ -1,124 +1,39 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const Budgeting: React.FC = () => {
-  const navigate = useNavigate();  // Correct usage of useNavigate()
-
+const BudgetingSection: React.FC = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        height: '100vh',
-        backgroundColor: '#001f3f',
-        color: '#ffffff',
-        fontFamily: 'Arial, sans-serif',
-        gap: '20px',
-        position: 'relative',
-        padding: '20px',
-      }}
-    >
-      <div
-        style={{
-          border: '10px solid #FFD700',
-          borderRadius: '15px',
-          padding: '50px',
-          textAlign: 'center',
-          width: '100%',
-          maxWidth: '600px',
-          boxSizing: 'border-box',
-          position: 'relative',
-          minHeight: '600px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          gap: '15px',
-        }}
-      >
-        <h1>Budgeting Module</h1>
+    <Link to="/Budgeting" style={{ textDecoration: 'none' }}>
+      {/* Budgeting Section */}
+      <section style={{ marginBottom: '50px' }}>
+        <h2 style={{ color: '#001f3f', fontSize: '32px', fontWeight: 'bold' }}>Budgeting</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          {/* Image on the left */}
+          <div style={{ flex: '1', padding: '20px' }}>
+            <img 
+              src="/img6.jpg" 
+              alt="Budgeting Image" 
+              style={{ width: '70%', height: 'auto', borderRadius: '8px' }} 
+            />
+          </div>
 
-        <button
-          onClick={() => navigate('/set-budget')}  // Navigate to Set Budget
-          style={{
-            padding: '12px 24px',
-            backgroundColor: '#FFD700',
-            color: '#001f3f',
-            border: 'none',
-            borderRadius: '5px',
-            fontSize: '16px',
-            cursor: 'pointer',
-          }}
-        >
-          Set Budget
-        </button>
-
-        <button
-          onClick={() => navigate('/track-expenses')}  // Navigate to Track Expenses
-          style={{
-            padding: '12px 24px',
-            backgroundColor: '#FFD700',
-            color: '#001f3f',
-            border: 'none',
-            borderRadius: '5px',
-            fontSize: '16px',
-            cursor: 'pointer',
-          }}
-        >
-          Track Expenses
-        </button>
-
-        <button
-          onClick={() => navigate('/savings')}  // Navigate to Savings
-          style={{
-            padding: '12px 24px',
-            backgroundColor: '#FFD700',
-            color: '#001f3f',
-            border: 'none',
-            borderRadius: '5px',
-            fontSize: '16px',
-            cursor: 'pointer',
-          }}
-        >
-          Savings
-        </button>
-
-        <button
-          onClick={() => navigate('/view-charts')}  // Navigate to View Charts
-          style={{
-            padding: '12px 24px',
-            backgroundColor: '#FFD700',
-            color: '#001f3f',
-            border: 'none',
-            borderRadius: '5px',
-            fontSize: '16px',
-            cursor: 'pointer',
-          }}
-        >
-          View Charts
-        </button>
-
-        {/* Go Back to HomePage Button */}
-        <div style={{ marginTop: 'auto' }}>
-          <button
-            onClick={() => navigate('/')}  // Navigate to HomePage
-            style={{
-              padding: '12px 24px',
-              backgroundColor: '#1E90FF',  // Blue background for HomePage button
-              color: '#ffffff',
-              border: 'none',
-              borderRadius: '5px',
-              fontSize: '16px',
-              cursor: 'pointer',
-            }}
-          >
-            Go Back to HomePage
-          </button>
+          {/* Content on the right */}
+          <div style={{ flex: '1', padding: '20px' }}>
+            <p style={{ color: '#333', fontSize: '20px', lineHeight: '1.6' }}>
+              The <strong>Budgeting</strong> module helps users create and manage personal budgets with ease. It provides tools to track expenses, categorize spending, and set savings goals. The module includes various budgeting strategies, such as the 50/30/20 rule, and offers visual aids like charts to help users understand their financial situation. Users can monitor their monthly and yearly spending trends and adjust their budgets accordingly. This module also includes tips for reducing unnecessary expenses and achieving financial goals through efficient budgeting.
+            </p>
+          </div>
         </div>
-      </div>
-    </div>
+
+        {/* Additional Budgeting Content */}
+        <div style={{ marginTop: '40px' }}>
+          <h3 style={{ color: '#001f3f', fontSize: '28px', fontWeight: 'bold' }}>How to Start Budgeting?</h3>
+          <p style={{ color: '#333', fontSize: '20px', lineHeight: '1.6' }}>
+            Starting a budget is the first step towards achieving financial stability. Begin by tracking your income and expenses to understand where your money is going. List your essential expenses, such as rent, utilities, and groceries, and set aside funds for savings or investments. From there, categorize your discretionary spending (like entertainment or dining out) and create limits to help manage these expenses. Use budgeting tools or apps that can automatically track your spending and provide reports to visualize where improvements can be made. Start small and make adjustments as you go to ensure your budget is sustainable.
+          </p>
+        </div>
+      </section>
+    </Link>
   );
 };
 
-export default Budgeting;
+export default BudgetingSection;

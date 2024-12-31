@@ -1,8 +1,8 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/LoginPage';
 import Home from './components/HomePage';
-import LevelNavigation from './components/LevelNavigation';
+import FinEducation from './components/FinEducation';
 import Level1Video from './components/Level1/Level1Video';
 import Level1Instructions from './components/Level1/Level1Instructions';
 import Level1Quiz from './components/Level1/Level1Quiz';
@@ -26,9 +26,8 @@ const App: React.FC = () => {
 
       {/* Home Page */}
       <Route path="/home" element={<Home />} />
-
-      {/* Level Navigation */}
-      <Route path="/level-navigation" element={<LevelNavigation />} />
+      {/* FinEducation */}
+      <Route path="/fineducation" element={<FinEducation />} />
 
       {/* Level 1 Routes */}
       <Route path="/Level1/video" element={<Level1Video />} />

@@ -1,159 +1,168 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import React Router's useNavigate
 
-const Login: React.FC = () => {
-  const navigate = useNavigate();
+const LoginPage: React.FC = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false); // State to toggle password visibility
+  const [email, setEmail] = useState("saistikajk@gmail.com"); // Default email
+  const [password, setPassword] = useState("saistika"); // Default password
+  const navigate = useNavigate(); // Initialize the navigate function
 
-  // State to store user input
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
-  const [error, setError] = useState('');
-
-  // Predefined username and password
-  const predefinedUsername = 'SAISTIKA';
-  const predefinedPassword = '#SAISTIKA';
-
-  const handleLogin = () => {
-    // Check if username and password match
-    if (username === predefinedUsername && password === predefinedPassword) {
-      setError(''); // Clear error
-      navigate('/home'); // Navigate to home page
-    } else {
-      setError('Invalid username or password'); // Show error message
-    }
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent page reload
+    navigate("/home"); // Navigate to the Home page
   };
 
-  // Define the input style object with no border
-  const inputStyle = {
-    marginBottom: '20px',
-    padding: '10px',
-    fontSize: '16px',
-    border: 'none', // Remove the border completely
-    width: '100%',
-    maxWidth: '300px',
-    boxSizing: 'border-box' as const,
-    backgroundColor: '#ffffff',
-    color: '#001f3f',
-    position: 'relative' as const,
-  };
-
-  // Define the container style object with no border and positioned at the top-right corner, with glowing border
-  const containerStyle = {
-    width: '100%',
-    maxWidth: '400px',
-    padding: '30px',
-    border: 'none',
-    borderRadius: '15px', // Optional: round the corners
-    backgroundColor: '#001f3f',
-    textAlign: 'center' as const,
-    display: 'flex',
-    flexDirection: 'column' as const,
-    alignItems: 'center' as const, // Center align username and password
-    position: 'absolute' as const, // Set absolute position
-    top: '20px', // Adjust the top margin (distance from top)
-    right: '20px', // Adjust the right margin (distance from the right)
-    boxShadow: '0 0 15px 5px rgba(173, 216, 230, 0.8)', // Glowing light blue border effect
+  const togglePasswordVisibility = () => {
+    setPasswordVisible((prev) => !prev); // Toggle the password visibility
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-        background: `url('fin_image1.png') no-repeat center center/cover`, // Ensure this is correct
-        fontFamily: 'Arial, sans-serif',
-        position: 'relative',
-      }}
-    >
-      {/* Optional overlay to improve text visibility */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent overlay for visibility
-          zIndex: -1,
-        }}
-      ></div>
-
-      <div style={containerStyle}>
-        <h1 style={{ color: '#FFD700', marginBottom: '20px' }}>FINNEXUS</h1>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          style={inputStyle} // Applying the inputStyle here
-        />
+    <div style={styles.outerContainer}>
+      <div style={styles.innerContainer}>
+        {/* Left Half - Background Image */}
         <div
           style={{
-            position: 'relative',
-            marginBottom: '20px',
-            width: '100%',
-            maxWidth: '300px',
+            ...styles.leftHalf,
+            backgroundImage: `url('/img1.jpeg')`,
+            backgroundPosition: "center 10%", // Slightly right
           }}
-        >
-          <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{
-              ...inputStyle,
-              paddingRight: '60px', // Add padding for the button inside
-            }}
-          />
-          <button
-            onClick={() => setShowPassword(!showPassword)}
-            style={{
-              position: 'absolute',
-              right: '10px',
-              top: '50%',
-              transform: 'translateY(-50%)', // Vertically center the button
-              background: 'none',
-              border: 'none',
-              color: '#FFD700',
-              cursor: 'pointer',
-              fontSize: '14px',
-              fontWeight: 'bold',
-            }}
-          >
-            {showPassword ? 'Hide' : 'Show'}
-          </button>
-        </div>
-        {error && (
-          <div
-            style={{
-              color: 'red',
-              marginBottom: '20px',
-            }}
-          >
-            {error}
+        ></div>
+
+        {/* Right Half - Login Form */}
+        <div style={styles.rightHalf}>
+          <div style={styles.loginForm}>
+            <h2 style={styles.title}>Login</h2>
+            <form onSubmit={handleLogin}>
+              <div style={styles.formGroup}>
+                <label style={styles.specialLabel}>Email</label>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email} // Use the email state for the input value
+                  onChange={(e) => setEmail(e.target.value)} // Update the email state on change
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label style={styles.specialLabel}>Password</label>
+                <div style={styles.passwordContainer}>
+                  <input
+                    type={passwordVisible ? "text" : "password"} // Toggle password visibility
+                    placeholder="Enter your password"
+                    value={password} // Use the password state for the input value
+                    onChange={(e) => setPassword(e.target.value)} // Update the password state on change
+                    style={styles.input} // Same style as the email input
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    style={styles.showBtn}
+                  >
+                    {passwordVisible ? "Hide" : "Show"}
+                  </button>
+                </div>
+              </div>
+              <button type="submit" style={styles.loginBtn}>
+                Login
+              </button>
+            </form>
           </div>
-        )}
-        <button
-          onClick={handleLogin}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#FFD700',
-            color: '#001f3f',
-            border: 'none',
-            borderRadius: '5px',
-            fontSize: '16px',
-            cursor: 'pointer',
-          }}
-        >
-          Login
-        </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+const styles: { [key: string]: React.CSSProperties } = {
+  outerContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    backgroundColor: "#ffffff", // White background for the outer container
+  },
+  innerContainer: {
+    width: "80%",
+    maxWidth: "900px",
+    height: "400px", // Adjusted height
+    display: "flex",
+    borderRadius: "10px",
+    border: "4px solid black", // Black border for the whole container
+    overflow: "hidden",
+    backgroundClip: "padding-box",
+  },
+  leftHalf: {
+    flex: 1,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+  },
+  rightHalf: {
+    flex: 1,
+    backgroundColor: "#333333", // Dark background for contrast
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  loginForm: {
+    width: "80%",
+    maxWidth: "350px", // Adjust the width of the form
+    padding: "2rem",
+    borderRadius: "8px",
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)", // Optional: subtle shadow for the form
+  },
+  title: {
+    marginBottom: "1.5rem",
+    fontSize: "1.8rem",
+    color: "#ffffff", // White color for the title
+    textAlign: "center",
+  },
+  formGroup: {
+    marginBottom: "1.5rem",
+    width: "100%",
+  },
+  specialLabel: {
+    display: "block",
+    marginBottom: "0.5rem",
+    fontSize: "1.2rem", // Larger font size
+    fontWeight: "bold", // Bold text
+    color: "#ffffff", // White color for labels
+    textTransform: "uppercase", // Make the label uppercase
+    letterSpacing: "0.5px", // Add slight spacing for a polished look
+  },
+  input: {
+    width: "100%", // Ensure both input fields have the same width
+    padding: "0.8rem",
+    fontSize: "1rem",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    backgroundColor: "#f9f9f9",
+    color: "#333333", // Dark text inside input
+  },
+  passwordContainer: {
+    position: "relative",
+    width: "100%", // Ensure the container spans the full width of the input
+  },
+  showBtn: {
+    position: "absolute",
+    right: "10px", // Position the button inside the input field
+    background: "none",
+    border: "none",
+    color: "#007bff", // Blue color for the button
+    cursor: "pointer",
+    fontSize: "1rem",
+    top: "50%",
+    transform: "translateY(-50%)", // Vertically center the button
+  },
+  loginBtn: {
+    width: "100%",
+    padding: "0.8rem",
+    fontSize: "1rem",
+    backgroundColor: "#007bff", // Blue button for contrast
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
+};
+
+export default LoginPage;
