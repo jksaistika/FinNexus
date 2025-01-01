@@ -1,0 +1,79 @@
+/* Styling for the container */
+.plans-container {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    font-size: 18px; /* Increased font size */
+  }
+  
+  /* Styling for the table */
+  .plans-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  /* Styling for table headers */
+  .plans-table th {
+    background-color: #f2f2f2;
+    padding: 12px;
+    text-align: left;
+    font-size: 20px; /* Increased font size */
+    color: #333;
+  }
+  
+  /* Special styling for the first header (Plan Name) */
+  .first-header {
+    background-color: #3498db; /* Blue background */
+    color: white; /* White text */
+    font-weight: bold;
+  }
+  
+  /* Styling for table cells */
+  .plans-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-size: 18px; /* Increased font size */
+  }
+  
+  /* Adding alternating row colors for better readability */
+  .plans-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Styling the list inside table cells */
+  .plans-table ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  
+  .plans-table ul li {
+    font-size: 16px; /* Increased font size for list items */
+  }
+  
+  /* Styling for the plan names and description */
+  .plans-table td h4 {
+    font-size: 20px; /* Increased font size */
+    font-weight: bold;
+  }
+  
+  .plans-table td p {
+    font-size: 18px; /* Increased font size */
+  }
+  
+  /* Styling for the "Go Back" button */
+  .go-back-button {
+    background-color: #3498db; /* Blue background */
+    color: white; /* White text */
+    padding: 10px 20px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .go-back-button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+  }
+  

@@ -1,39 +1,128 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const BudgetingSection: React.FC = () => {
+// Button Styles
+const buttonStyles = {
+  padding: '12px 24px',
+  borderRadius: '5px',
+  fontSize: '16px',
+  cursor: 'pointer',
+  width: '100%', // Full width for buttons
+  border: '2px solid black', // Black border
+  color: '#ffffff', // White text color
+  backgroundColor: 'black', // Black-filled background for buttons
+};
+
+const Budgeting: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
-    <Link to="/Budgeting" style={{ textDecoration: 'none' }}>
-      {/* Budgeting Section */}
-      <section style={{ marginBottom: '50px' }}>
-        <h2 style={{ color: '#001f3f', fontSize: '32px', fontWeight: 'bold' }}>Budgeting</h2>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          {/* Image on the left */}
-          <div style={{ flex: '1', padding: '20px' }}>
-            <img 
-              src="/img6.jpg" 
-              alt="Budgeting Image" 
-              style={{ width: '70%', height: 'auto', borderRadius: '8px' }} 
-            />
-          </div>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        minHeight: '70vh',
+        backgroundColor: 'white',
+        padding: '20px',
+        gap: '-20px', // Reduced gap between the image and the container
+      }}
+    >
+      {/* Image Section (45% Width) */}
+      <div
+        style={{
+          flex: '0 0 45%', // Takes up 45% of the container width
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <img
+          src="/img15.jpg"
+          alt="Budgeting"
+          style={{
+            width: '90%', // 90% of its container's width
+            height: 'auto',
+            borderRadius: '8px',
+          }}
+        />
+      </div>
 
-          {/* Content on the right */}
-          <div style={{ flex: '1', padding: '20px' }}>
-            <p style={{ color: '#333', fontSize: '20px', lineHeight: '1.6' }}>
-              The <strong>Budgeting</strong> module helps users create and manage personal budgets with ease. It provides tools to track expenses, categorize spending, and set savings goals. The module includes various budgeting strategies, such as the 50/30/20 rule, and offers visual aids like charts to help users understand their financial situation. Users can monitor their monthly and yearly spending trends and adjust their budgets accordingly. This module also includes tips for reducing unnecessary expenses and achieving financial goals through efficient budgeting.
-            </p>
-          </div>
-        </div>
+      {/* Content Section (Smaller Size) */}
+      <div
+        style={{
+          flex: '0 0 35%', // Reduced to 35% of the container width
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'white',
+          color: '#001f3f',
+          fontFamily: 'Arial, sans-serif',
+          padding: '20px', // Reduced padding
+          borderRadius: '15px',
+          border: '4px solid black',
+        }}
+      >
+        <h1 style={{ fontSize: '24px', marginBottom: '15px' }}>Budgeting Module</h1>
+        <p style={{ fontSize: '16px', fontStyle: 'italic', marginBottom: '20px' }}>
+          Manage your finances effectively with easy-to-use budgeting tools.
+        </p>
 
-        {/* Additional Budgeting Content */}
-        <div style={{ marginTop: '40px' }}>
-          <h3 style={{ color: '#001f3f', fontSize: '28px', fontWeight: 'bold' }}>How to Start Budgeting?</h3>
-          <p style={{ color: '#333', fontSize: '20px', lineHeight: '1.6' }}>
-            Starting a budget is the first step towards achieving financial stability. Begin by tracking your income and expenses to understand where your money is going. List your essential expenses, such as rent, utilities, and groceries, and set aside funds for savings or investments. From there, categorize your discretionary spending (like entertainment or dining out) and create limits to help manage these expenses. Use budgeting tools or apps that can automatically track your spending and provide reports to visualize where improvements can be made. Start small and make adjustments as you go to ensure your budget is sustainable.
-          </p>
+        <button
+          onClick={() => navigate('/set-budget')}
+          style={{
+            ...buttonStyles,
+            marginBottom: '15px',
+          }}
+        >
+          Set Budget
+        </button>
+
+        <button
+          onClick={() => navigate('/track-expenses')}
+          style={{
+            ...buttonStyles,
+            marginBottom: '15px',
+          }}
+        >
+          Track Expenses
+        </button>
+
+        <button
+          onClick={() => navigate('/savings')}
+          style={{
+            ...buttonStyles,
+            marginBottom: '15px',
+          }}
+        >
+          Saving
+        </button>
+
+        <button
+          onClick={() => navigate('/expense-overview')}
+          style={{
+            ...buttonStyles,
+            marginBottom: '20px',
+          }}
+        >
+          View Charts
+        </button>
+
+        <div>
+          <button
+            onClick={() => navigate('/home')}
+            style={{
+              ...buttonStyles,
+              backgroundColor: 'green', // Green background for the "Go Back to HomePage" button
+            }}
+          >
+            Go Back to HomePage
+          </button>
         </div>
-      </section>
-    </Link>
+      </div>
+    </div>
   );
 };
 
-export default BudgetingSection;
+export default Budgeting;

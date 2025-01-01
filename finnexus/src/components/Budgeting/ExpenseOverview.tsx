@@ -1,8 +1,46 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 
-const Budgeting: React.FC = () => {
-  const navigate = useNavigate();  // Correct usage of useNavigate()
+const ExpenseOverview: React.FC = () => {
+  const [dailyExpenses, setDailyExpenses] = useState<number>(0);
+  const [weeklyExpenses, setWeeklyExpenses] = useState<number>(0);
+  const [monthlyExpenses, setMonthlyExpenses] = useState<number>(0);
+  const navigate = useNavigate(); // Initialize the navigate function
+
+  useEffect(() => {
+    const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+    const today = new Date();
+
+    let daily = 0;
+    let weekly = 0;
+    let monthly = 0;
+
+    expenses.forEach((expense: any) => {
+      const expenseDate = new Date(expense.date);
+
+      if (expenseDate.toDateString() === today.toDateString()) {
+        daily += expense.amount;
+      }
+      if (expenseDate >= new Date(today.setDate(today.getDate() - 7))) {
+        weekly += expense.amount;
+      }
+      if (
+        expenseDate.getMonth() === today.getMonth() &&
+        expenseDate.getFullYear() === today.getFullYear()
+      ) {
+        monthly += expense.amount;
+      }
+    });
+
+    setDailyExpenses(daily);
+    setWeeklyExpenses(weekly);
+    setMonthlyExpenses(monthly);
+  }, []);
+
+  // Function to navigate back to TrackExpense page
+  const handleBackClick = () => {
+    navigate('/track-expense'); // Navigate to the TrackExpense page
+  };
 
   return (
     <div
@@ -11,102 +49,110 @@ const Budgeting: React.FC = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100vh',
-        backgroundColor: '#001f3f',
-        color: '#ffffff',
-        fontFamily: 'Arial, sans-serif',
-        gap: '20px',
-        position: 'relative',
-        padding: '20px',
+        minHeight: '85vh',
+        marginTop: '0',
       }}
     >
       <div
         style={{
-          border: '10px solid #FFD700',
-          borderRadius: '15px',
-          padding: '50px',
-          textAlign: 'center',
-          width: '100%',
-          maxWidth: '600px',
-          boxSizing: 'border-box',
-          position: 'relative',
-          minHeight: '600px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        <h1>Budgeting Module</h1>
+        {/* Image */}
+        <img
+          src="/img10.jpg"
+          alt="Expenses"
+          style={{
+            width: '500px',
+            height: '550px',
+            borderRadius: '15px',
+            marginRight: '50px',
+          }}
+        />
 
-        {/* Set Budget Button */}
-        <div>
-          <button
-            onClick={() => navigate('/set-budget')}  // Navigate to Set Budget
+        {/* Content */}
+        <div
+          style={{
+            color: 'black',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            padding: '30px',
+            borderRadius: '12px',
+            boxShadow: '0 8px 8px rgba(0, 0, 0, 0.1)',
+            border: '2px solid black',
+            width: '400px',
+          }}
+        >
+          {/* Heading */}
+          <h1
             style={{
-              padding: '12px 24px',
-              backgroundColor: '#FFD700',
-              color: '#001f3f',
-              border: 'none',
-              borderRadius: '5px',
-              fontSize: '16px',
-              cursor: 'pointer',
-              marginBottom: '10px',
+              fontSize: '32px',
+              marginBottom: '20px',
+              color: 'black',
+              textAlign: 'center',
             }}
           >
-            Set Budget
-          </button>
-        </div>
+            Expense Overview
+          </h1>
 
-        {/* Track Expenses Button */}
-        <div>
-          <button
-            onClick={() => navigate('/track-expenses')}  // Navigate to Track Expenses
+          <div
             style={{
-              padding: '12px 24px',
-              backgroundColor: '#FFD700',
-              color: '#001f3f',
-              border: 'none',
-              borderRadius: '5px',
-              fontSize: '16px',
-              cursor: 'pointer',
-              marginBottom: '10px',
+              backgroundColor: 'rgba(255, 255, 255, 0.8)',
+              padding: '15px',
+              borderRadius: '8px',
+              margin: '15px 0',
+              border: '2px solid black',
             }}
           >
-            Track Expenses
-          </button>
-        </div>
+            <p>
+              <strong>Daily Total:</strong> ₹{dailyExpenses.toFixed(2)}
+            </p>
+          </div>
 
-        {/* Savings Button */}
-        <div>
-          <button
-            onClick={() => navigate('/savings')}  // Navigate to Savings
+          <div
             style={{
-              padding: '12px 24px',
-              backgroundColor: '#FFD700',
-              color: '#001f3f',
-              border: 'none',
-              borderRadius: '5px',
-              fontSize: '16px',
-              cursor: 'pointer',
-              marginBottom: '10px',
+              backgroundColor: 'rgba(255, 255, 255, 0.8)',
+              padding: '15px',
+              borderRadius: '8px',
+              margin: '15px 0',
+              border: '2px solid black',
             }}
           >
-            Savings
-          </button>
-        </div>
+            <p>
+              <strong>Weekly Total:</strong> ₹{weeklyExpenses.toFixed(2)}
+            </p>
+          </div>
 
-        {/* Go Back to HomePage Button */}
-        <div>
-          <button
-            onClick={() => navigate('/')}  // Navigate to HomePage
+          <div
             style={{
-              padding: '12px 24px',
-              backgroundColor: '#FFD700',
-              color: '#001f3f',
-              border: 'none',
-              borderRadius: '5px',
-              fontSize: '16px',
-              cursor: 'pointer',
+              backgroundColor: 'rgba(255, 255, 255, 0.8)',
+              padding: '15px',
+              borderRadius: '8px',
+              margin: '15px 0',
+              border: '2px solid black',
             }}
           >
-            Go Back to HomePage
+            <p>
+              <strong>Monthly Total:</strong> ₹{monthlyExpenses.toFixed(2)}
+            </p>
+          </div>
+
+          {/* Back Button */}
+          <button
+            onClick={handleBackClick}
+            style={{
+              backgroundColor: '#4CAF50', // Green button color
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              marginTop: '20px',
+              width: '100%', // Full width button
+            }}
+          >
+            Back to Track Expense
           </button>
         </div>
       </div>
@@ -114,4 +160,4 @@ const Budgeting: React.FC = () => {
   );
 };
 
-export default Budgeting;
+export default ExpenseOverview;

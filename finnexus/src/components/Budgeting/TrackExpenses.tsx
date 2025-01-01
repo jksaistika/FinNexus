@@ -1,202 +1,167 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Expense type definition
-interface Expense {
-  date: string;
-  amount: number;
-  category: string;
-  description: string;
-}
-
 const TrackExpenses: React.FC = () => {
-  const [expenses, setExpenses] = useState<Expense[]>([]); // State to store expenses
-  const [newExpense, setNewExpense] = useState<Expense>({
-    date: '',
+  const [newExpense, setNewExpense] = useState<any>({
     amount: 0,
-    category: '',
+    reason: '',
     description: '',
+    date: '', // New date field
   });
 
-  const navigate = useNavigate(); // For navigation to next page
+  const [expenses, setExpenses] = useState<any[]>([]); // State to store expenses
+  const navigate = useNavigate();
 
-  // Function to add an expense
   const handleAddExpense = () => {
-    if (newExpense.amount && newExpense.category && newExpense.description) {
-      const updatedExpenses = [
-        ...expenses,
-        {
-          date: newExpense.date || new Date().toLocaleDateString(),
-          amount: newExpense.amount,
-          category: newExpense.category,
-          description: newExpense.description,
-        },
-      ];
+    // Logic to add expense
+    if (newExpense.amount && newExpense.reason && newExpense.description && newExpense.date) {
+      const updatedExpenses = [...expenses, newExpense];
+      setExpenses(updatedExpenses);
+      setNewExpense({ amount: 0, reason: '', description: '', date: '' });
 
-      setExpenses(updatedExpenses); // Update state with new expense
-      setNewExpense({ date: '', amount: 0, category: '', description: '' }); // Reset the form
+      // Store the expenses in localStorage so it can be accessed by other components
+      localStorage.setItem('expenses', JSON.stringify(updatedExpenses));
     } else {
       alert('Please fill in all fields.');
     }
   };
 
-  // Navigate to the ExpenseTablePage with expenses as state
-  const handleViewTable = () => {
-    navigate('/expense-table', { state: { expenses } });
-  };
-
-  // Navigate to the ExpenseOverviewPage with expenses as state
-  const handleViewOverview = () => {
-    navigate('/expense-overview', { state: { expenses } });
-  };
-
-  // Navigate back to Budgeting page
-  const handleGoBack = () => {
-    navigate('/budgeting'); // Adjust this path to match your Budgeting route
-  };
-
   return (
     <div
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#001f3f',
-        color: '#ffffff',
-        fontFamily: 'Arial, sans-serif',
+        backgroundColor: 'white',
+        height: '75vh', // Full screen height
+        width: '100%',   // Full screen width
+        display: 'flex', // Flexbox for side-by-side layout
+        justifyContent: 'center', // Center the content
+        alignItems: 'center', // Vertically center the content
         padding: '20px',
-        minHeight: '100vh',
       }}
     >
-      <h1 style={{ color: '#FFD700' }}>Track Your Expenses</h1>
+      {/* Image Section (img2) */}
+      <div style={{ flex: 1, padding: '200px', maxWidth: '250px' }}>
+        <img
+          src="img2.jpg" // Replace with your actual image path
+          alt="Expense Image"
+          style={{
+            width: '170%',  // Make image fill its container
+            height: 'auto', // Maintain aspect ratio
+            borderRadius: '8px', // Optional: rounded corners
+            border: '3px solid black', // Border for image
+          }}
+        />
+      </div>
 
-      {/* Expense Entry Form */}
+      {/* Container Section */}
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '20px',
-          padding: '20px',
-          backgroundColor: '#001f3f',
-          border: '1px solid #FFD700',
+          flex: 1,
+          backgroundColor: 'transparent',
+          color: '#000',
+          padding: '10px', // Reduced padding to make container smaller
           borderRadius: '8px',
-          width: '100%',
-          maxWidth: '600px',
+          width: 'auto', // Adjust width to fit content
+          border: '2px solid black', // Black border for the container
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          textAlign: 'center',
+          marginLeft: '20px', // Space between image and container
+          maxWidth: '480px', // Set a max width to avoid the container growing too wide
         }}
       >
-        <input
-          type="number"
-          placeholder="Enter amount"
-          value={newExpense.amount || ''}
-          onChange={(e) =>
-            setNewExpense({ ...newExpense, amount: Number(e.target.value) })
-          }
-          style={{
-            padding: '10px',
-            fontSize: '16px',
-            borderRadius: '5px',
-            border: '1px solid #FFD700',
-            backgroundColor: '#001f3f',
-            color: '#ffffff',
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Enter category"
-          value={newExpense.category}
-          onChange={(e) =>
-            setNewExpense({ ...newExpense, category: e.target.value })
-          }
-          style={{
-            padding: '10px',
-            fontSize: '16px',
-            borderRadius: '5px',
-            border: '1px solid #FFD700',
-            backgroundColor: '#001f3f',
-            color: '#ffffff',
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Enter description"
-          value={newExpense.description}
-          onChange={(e) =>
-            setNewExpense({ ...newExpense, description: e.target.value })
-          }
-          style={{
-            padding: '10px',
-            fontSize: '16px',
-            borderRadius: '5px',
-            border: '1px solid #FFD700',
-            backgroundColor: '#001f3f',
-            color: '#ffffff',
-          }}
-        />
-        <button
-          onClick={handleAddExpense}
-          style={{
-            padding: '12px 24px',
-            backgroundColor: '#FFD700',
-            color: '#001f3f',
-            border: 'none',
-            borderRadius: '5px',
-            fontSize: '16px',
-            cursor: 'pointer',
-          }}
-        >
-          Add Expense
-        </button>
-      </div>
+        <h1>Track Your Expenses</h1>
 
-      {/* Buttons for View Table and Expense Overview */}
-      <div style={{ marginTop: '30px', display: 'flex', gap: '15px' }}>
-        <button
-          onClick={handleViewTable}
-          style={{
-            padding: '12px 24px',
-            backgroundColor: '#FFD700',
-            color: '#001f3f',
-            border: 'none',
-            borderRadius: '5px',
-            fontSize: '16px',
-            cursor: 'pointer',
-          }}
-        >
-          View Table
-        </button>
-        <button
-          onClick={handleViewOverview}
-          style={{
-            padding: '12px 24px',
-            backgroundColor: '#FFD700',
-            color: '#001f3f',
-            border: 'none',
-            borderRadius: '5px',
-            fontSize: '16px',
-            cursor: 'pointer',
-          }}
-        >
-          Expense Overview
-        </button>
-      </div>
+        <div>
+          <input
+            type="date"
+            value={newExpense.date}
+            onChange={(e) => setNewExpense({ ...newExpense, date: e.target.value })}
+            style={{ width: '90%', padding: '8px', marginBottom: '20px' }}
+          />
+          <input
+            type="number"
+            placeholder="Enter amount"
+            value={newExpense.amount || ''}
+            onChange={(e) => setNewExpense({ ...newExpense, amount: +e.target.value })}
+            style={{ width: '90%', padding: '8px', marginBottom: '20px' }}
+          />
+          <input
+            type="text"
+            placeholder="Enter reason"
+            value={newExpense.reason}
+            onChange={(e) => setNewExpense({ ...newExpense, reason: e.target.value })}
+            style={{ width: '90%', padding: '8px', marginBottom: '20px' }}
+          />
+          <input
+            type="text"
+            placeholder="Enter description"
+            value={newExpense.description}
+            onChange={(e) => setNewExpense({ ...newExpense, description: e.target.value })}
+            style={{ width: '90%', padding: '8px', marginBottom: '20px' }}
+          />
+          <button
+            onClick={handleAddExpense}
+            style={{
+              backgroundColor: '#4CAF50',
+              color: '#fff',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              width: '60%',
+              marginBottom: '20px',
+            }}
+          >
+            Add Expense
+          </button>
 
-      {/* Go Back Button to Budgeting */}
-      <div style={{ marginTop: '30px' }}>
-        <button
-          onClick={handleGoBack}
-          style={{
-            padding: '12px 24px',
-            backgroundColor: '#007BFF',
-            color: '#ffffff',
-            border: 'none',
-            borderRadius: '5px',
-            fontSize: '16px',
-            cursor: 'pointer',
-          }}
-        >
-          Go Back to Budgeting
-        </button>
+          <button
+            onClick={() => navigate('/expense-table', { state: { expenses } })}
+            style={{
+              backgroundColor: '#2196F3',
+              color: '#fff',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              width: '60%',
+              marginBottom: '20px',
+            }}
+          >
+            View Expense Table
+          </button>
+
+          <button
+            onClick={() => navigate('/expense-overview')}
+            style={{
+              backgroundColor: '#2196F3',
+              color: '#fff',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              width: '60%',
+            }}
+          >
+            View Expense Overview
+          </button>
+
+          {/* Back to Budgeting Button */}
+          <button
+            onClick={() => navigate('/budgeting')} // Adjust path if necessary
+            style={{
+              backgroundColor: '#FF9800',
+              color: '#fff',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              width: '60%',
+              marginTop: '20px', // Add margin for separation
+            }}
+          >
+            Back to Budgeting
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Level2Quiz: React.FC = () => {
+const Level2Quiz: React.FC<{ onLevelComplete: (level: number) => void }> = ({ onLevelComplete }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score, setScore] = useState(0);
@@ -59,7 +59,7 @@ const Level2Quiz: React.FC = () => {
 
   const handleUnlockNextLevel = () => {
     if (score >= 8) {
-      // Navigate to finEducation.tsx when score is sufficient
+      onLevelComplete(2);  // Pass level number to parent to update completion
       navigate('/finEducation'); // Replace with the correct route path for finEducation
     } else {
       alert('Your score is not enough to unlock the next level. Try again!');
@@ -120,15 +120,16 @@ const Level2Quiz: React.FC = () => {
             <p style={{ color: '#fff' }}>You completed {questions.length} questions.</p>
             <div style={{ backgroundColor: '#4CAF50', width: '100px', height: '100px', borderRadius: '50%', margin: '20px auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <span style={{ color: '#fff', fontSize: '24px' }}>
-                <span style={{ fontSize: '28px', fontWeight: 'bold' }}>{score}</span> / 
-                <span style={{ fontSize: '28px', fontWeight: 'bold' }}> {questions.length}</span>
+                <strong>{score}</strong>
               </span>
             </div>
-            <p style={{ color: '#fff' }}>You answered {score} out of {questions.length} questions correctly.</p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-              <button onClick={handleTryAgain} style={{ padding: '10px 20px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Try Again</button>
-              <button onClick={handleUnlockNextLevel} style={{ padding: '10px 20px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Unlock to Next Level</button>
-            </div>
+            <p style={{ color: '#fff' }}>Your score: {score} out of {questions.length}</p>
+            <button onClick={handleUnlockNextLevel} style={{ padding: '10px 20px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+              Unlock Next Level
+            </button>
+            <button onClick={handleTryAgain} style={{ padding: '10px 20px', backgroundColor: '#f44336', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', marginLeft: '10px' }}>
+              Try Again
+            </button>
           </div>
         )}
       </div>

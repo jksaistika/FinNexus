@@ -1,43 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 const Home: React.FC = () => {
   return (
     <div style={{ padding: '40px', fontFamily: 'Arial, sans-serif', backgroundColor: '#f4f4f4' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', padding: '20px', backgroundColor: '#001f3f', color: '#fff' }}>
-        <div style={{ fontSize: '40px', fontWeight: 'bold' }}>FINNEXUS</div>
-        <nav style={{ display: 'flex', alignItems: 'center' }}>
-          <Link to="/" style={{ color: '#fff', margin: '0 20px', fontSize: '22px' }}>Home</Link>
-          <Link to="/about" style={{ color: '#fff', margin: '0 20px', fontSize: '22px' }}>About</Link>
-          <Link to="/chatbot" style={{ color: '#fff', margin: '0 20px', fontSize: '22px' }}>Chatbot</Link>
-          <Link to="/translator" style={{ color: '#fff', margin: '0 20px', fontSize: '22px' }}>Translator</Link>
-
-          {/* Login and Sign Up Buttons */}
-          <Link to="/login" style={{ 
-            color: '#fff', 
-            margin: '0 20px', 
-            padding: '10px 20px', 
-            backgroundColor: '#007bff', 
-            borderRadius: '5px', 
-            textDecoration: 'none', 
-            fontSize: '18px' 
-          }}>
-            Login
-          </Link>
-          <Link to="/signup" style={{ 
-            color: '#fff', 
-            margin: '0 20px', 
-            padding: '10px 20px', 
-            backgroundColor: '#28a745', 
-            borderRadius: '5px', 
-            textDecoration: 'none', 
-            fontSize: '18px' 
-          }}>
-            Sign Up
-          </Link>
-        </nav>
-      </header>
-
       {/* Image Section */}
       <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'space-between' }}>
         <div style={{ flex: '1', padding: '20px' }}>
@@ -60,9 +25,7 @@ const Home: React.FC = () => {
       <div style={{ marginTop: '60px' }}>
         <section style={{ marginBottom: '50px' }}>
           <h2 style={{ color: '#001f3f', fontSize: '40px', fontWeight: 'bold', textAlign: 'left' }}>
-            <Link to="/fineducation" style={{ color: '#001f3f', textDecoration: 'none' }}>
-              Fin-Education
-            </Link>
+          <Link to="/fineducation"> 1.Fin_Education</Link>
           </h2>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {/* Image on the right */}
@@ -81,12 +44,22 @@ const Home: React.FC = () => {
               </p>
             </div>
           </div>
+          {/* Content on the left */}
+          <div style={{ flex: '1', padding: '20px' }}>
+          <h3 style={{ color: '#001f3f', fontSize: '32px', fontWeight: 'bold', textAlign: 'left' }}>From Basics to Advanced "Fin_Education"</h3>
+              <p style={{ color: '#333', fontSize: '24px', lineHeight: '1.8', textAlign: 'justify' }}>
+              The Fin-Education module also includes practical tools and real-life scenarios to help users apply their knowledge effectively. Users can explore topics such as managing credit and debt, understanding interest rates, building emergency funds, and planning for retirement. The module emphasizes financial goal-setting and provides step-by-step guidance on creating personalized financial plans.
+To make learning engaging, it incorporates case studies, gamified challenges, and reward systems for completing milestones. The module also addresses common financial pitfalls and teaches users how to make informed decisions to avoid them.
+For advanced learners, the module offers insights into tax planning, insurance, and financial regulations, empowering users to navigate complex financial landscapes confidently. By completing the module, users gain not only theoretical knowledge but also practical skills to manage their finances effectively in the real world.
+              </p>
+            </div>
         </section>
 
         {/* Budgeting Section */}
         <section style={{ marginBottom: '50px' }}>
           <h2 style={{ color: '#001f3f', fontSize: '40px', fontWeight: 'bold', textAlign: 'left' }}>
-            Budgeting</h2>
+          <Link to="/budgeting"> 2.Budgeting</Link>
+            </h2>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {/* Image on the left */}
             <div style={{ flex: '1', padding: '20px' }}>
@@ -116,7 +89,9 @@ const Home: React.FC = () => {
 
         {/* Micro-Investment Plans Section */}
         <section style={{ marginBottom: '50px' }}>
-          <h2 style={{ color: '#001f3f', fontSize: '40px', fontWeight: 'bold', textAlign: 'left' }}>Micro-Investment Plans</h2>
+          <h2 style={{ color: '#001f3f', fontSize: '40px', fontWeight: 'bold', textAlign: 'left' }}>
+          <Link to="/micro-investment"> 3.Micro-Investment</Link>
+            </h2>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {/* Image on the right */}
             <div style={{ flex: '1', padding: '20px' }}>
@@ -147,7 +122,9 @@ const Home: React.FC = () => {
                 {/* Mentorship & Community Section */}
                 <section style={{ marginBottom: '50px' }}>
           <h2 style={{ color: '#001f3f', fontSize: '40px', fontWeight: 'bold', textAlign: 'left' }}>
-            Mentorship & Community
+          <Link to="/mentorship and community" style={{ color: '#001f3f', textDecoration: 'none' }}>
+            4.Mentorship & Community
+            </Link>
           </h2>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {/* Image on the left */}
@@ -195,7 +172,9 @@ const Home: React.FC = () => {
 
         {/* Government & NGO Schemes Section */}
         <section style={{ marginBottom: '50px' }}>
-          <h2 style={{ color: '#001f3f', fontSize: '40px', fontWeight: 'bold', textAlign: 'left' }}>Government & NGO Schemes</h2>
+          <h2 style={{ color: '#001f3f', fontSize: '40px', fontWeight: 'bold', textAlign: 'left' }}>
+          <Link to="/schemesPage"> 5.Schemes</Link>
+            </h2>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {/* Image on the right */}
             <div style={{ flex: '1', padding: '20px' }}>
