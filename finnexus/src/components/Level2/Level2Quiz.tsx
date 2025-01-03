@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Level2Quiz: React.FC<{ onLevelComplete: (level: number) => void }> = ({ onLevelComplete }) => {
+const Level2Quiz: React.FC = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState<boolean[]>(new Array(10).fill(false));
 
-  const navigate = useNavigate();
 
   const questions = [
     { question: 'What is compound interest?', options: ['Interest calculated only on the principal amount', 'Interest calculated on the initial principal plus accumulated interest', 'Interest calculated on a daily basis', 'Interest calculated annually without compounding'], correctAnswer: 'Interest calculated on the initial principal plus accumulated interest' },
@@ -55,15 +54,6 @@ const Level2Quiz: React.FC<{ onLevelComplete: (level: number) => void }> = ({ on
     setCurrentQuestionIndex(0);
     setQuizCompleted(false);
     setAnsweredQuestions(new Array(10).fill(false));
-  };
-
-  const handleUnlockNextLevel = () => {
-    if (score >= 8) {
-      onLevelComplete(2);  // Pass level number to parent to update completion
-      navigate('/finEducation'); // Replace with the correct route path for finEducation
-    } else {
-      alert('Your score is not enough to unlock the next level. Try again!');
-    }
   };
 
   return (
@@ -124,9 +114,6 @@ const Level2Quiz: React.FC<{ onLevelComplete: (level: number) => void }> = ({ on
               </span>
             </div>
             <p style={{ color: '#fff' }}>Your score: {score} out of {questions.length}</p>
-            <button onClick={handleUnlockNextLevel} style={{ padding: '10px 20px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-              Unlock Next Level
-            </button>
             <button onClick={handleTryAgain} style={{ padding: '10px 20px', backgroundColor: '#f44336', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', marginLeft: '10px' }}>
               Try Again
             </button>

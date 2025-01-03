@@ -39,7 +39,7 @@ const ExpenseOverview: React.FC = () => {
 
   // Function to navigate back to TrackExpense page
   const handleBackClick = () => {
-    navigate('/track-expense'); // Navigate to the TrackExpense page
+    navigate('/TrackExpense'); // Navigate to the TrackExpense page
   };
 
   return (

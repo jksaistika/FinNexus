@@ -5,7 +5,7 @@ const Level2Video: React.FC = () => {
   const navigate = useNavigate();
 
   const handleProceedClick = () => {
-    navigate('/Level2/instructions'); // Navigate to Level 2 Instructions
+    navigate('/Level2instructions'); // Navigate to Level 2 Instructions
   };
 
   return (

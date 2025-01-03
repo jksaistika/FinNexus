@@ -222,7 +222,7 @@ const SetBudget: React.FC = () => {
 </button>
 
 <button
-  onClick={() => navigate('/track-expenses')}
+  onClick={() => navigate('/TrackExpenses')}
   style={{
     padding: '12px 24px',
     backgroundColor: 'green',  // Green background color

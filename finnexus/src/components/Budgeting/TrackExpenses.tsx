@@ -115,7 +115,7 @@ const TrackExpenses: React.FC = () => {
           </button>
 
           <button
-            onClick={() => navigate('/expense-table', { state: { expenses } })}
+            onClick={() => navigate('/ExpenseTable', { state: { expenses } })}
             style={{
               backgroundColor: '#2196F3',
               color: '#fff',
@@ -131,7 +131,7 @@ const TrackExpenses: React.FC = () => {
           </button>
 
           <button
-            onClick={() => navigate('/expense-overview')}
+            onClick={() => navigate('/ExpenseOverview')}
             style={{
               backgroundColor: '#2196F3',
               color: '#fff',

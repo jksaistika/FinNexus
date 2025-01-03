@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-interface Level3QuizProps {
-  onLevelComplete: (level: string) => void;
-}
-
-const Level3Quiz: React.FC<Level3QuizProps> = ({ onLevelComplete }) => {
+const Level3Quiz: React.FC = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState<boolean[]>(new Array(10).fill(false));
 
-  const navigate = useNavigate();
 
   const questions = [
     { question: 'What is the difference between a traditional IRA and a Roth IRA?', options: ['Both are tax-free', 'Traditional IRA offers tax-deferred growth, Roth IRA offers tax-free growth', 'Roth IRA is more expensive', 'There is no difference'], correctAnswer: 'Traditional IRA offers tax-deferred growth, Roth IRA offers tax-free growth' },
@@ -61,14 +55,10 @@ const Level3Quiz: React.FC<Level3QuizProps> = ({ onLevelComplete }) => {
     setAnsweredQuestions(new Array(10).fill(false));
   };
 
+  // Remove the handleUnlockNextLevel logic if you don't want any process on level completion
   const handleUnlockNextLevel = () => {
-    if (score >= 8) {
-      // Call the onLevelComplete prop to pass the level
-      onLevelComplete(String(3)); // Pass the level info
-      navigate('/nextLevel'); // Replace with the correct route path for the next level
-    } else {
-      alert('Your score is not enough to unlock the next level. Try again!');
-    }
+    alert('Level Completed! No further process defined.');
+    // You can add more actions here if needed.
   };
 
   return (

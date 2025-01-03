@@ -90,7 +90,7 @@ For advanced learners, the module offers insights into tax planning, insurance, 
         {/* Micro-Investment Plans Section */}
         <section style={{ marginBottom: '50px' }}>
           <h2 style={{ color: '#001f3f', fontSize: '40px', fontWeight: 'bold', textAlign: 'left' }}>
-          <Link to="/micro-investment"> 3.Micro-Investment</Link>
+          <Link to="/MicroInvestment"> 3.Micro-Investment</Link>
             </h2>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {/* Image on the right */}
@@ -122,7 +122,7 @@ For advanced learners, the module offers insights into tax planning, insurance, 
                 {/* Mentorship & Community Section */}
                 <section style={{ marginBottom: '50px' }}>
           <h2 style={{ color: '#001f3f', fontSize: '40px', fontWeight: 'bold', textAlign: 'left' }}>
-          <Link to="/mentorship and community" style={{ color: '#001f3f', textDecoration: 'none' }}>
+          <Link to="/ScheduleTable" style={{ color: '#001f3f', textDecoration: 'none' }}>
             4.Mentorship & Community
             </Link>
           </h2>
@@ -173,7 +173,7 @@ For advanced learners, the module offers insights into tax planning, insurance, 
         {/* Government & NGO Schemes Section */}
         <section style={{ marginBottom: '50px' }}>
           <h2 style={{ color: '#001f3f', fontSize: '40px', fontWeight: 'bold', textAlign: 'left' }}>
-          <Link to="/schemesPage"> 5.Schemes</Link>
+          <Link to="/schemes"> 5.Schemes</Link>
             </h2>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {/* Image on the right */}

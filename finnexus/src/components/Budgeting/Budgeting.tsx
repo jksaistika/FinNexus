@@ -70,7 +70,7 @@ const Budgeting: React.FC = () => {
         </p>
 
         <button
-          onClick={() => navigate('/set-budget')}
+          onClick={() => navigate('/SetBudget')}
           style={{
             ...buttonStyles,
             marginBottom: '15px',
@@ -80,7 +80,7 @@ const Budgeting: React.FC = () => {
         </button>
 
         <button
-          onClick={() => navigate('/track-expenses')}
+          onClick={() => navigate('/TrackExpenses')}
           style={{
             ...buttonStyles,
             marginBottom: '15px',
@@ -90,23 +90,13 @@ const Budgeting: React.FC = () => {
         </button>
 
         <button
-          onClick={() => navigate('/savings')}
+          onClick={() => navigate('/Savings')}
           style={{
             ...buttonStyles,
             marginBottom: '15px',
           }}
         >
           Saving
-        </button>
-
-        <button
-          onClick={() => navigate('/expense-overview')}
-          style={{
-            ...buttonStyles,
-            marginBottom: '20px',
-          }}
-        >
-          View Charts
         </button>
 
         <div>

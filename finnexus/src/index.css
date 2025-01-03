@@ -1,65 +1,68 @@
-/* Reset some default browser styles */
-body, html, #root {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Arial', sans-serif;
-  background-color: #FFFFFF; /* Navy background */
-  color: #ffffff; /* Default white text for contrast */
-}
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 
-/* Global button styles */
-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 
-button:active {
-  transform: scale(0.98);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-  text-decoration: none;
-  color: inherit;
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
 }
 
-/* Ensure consistent layout */
-.container {
+body {
+  margin: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
-/* Add global styles for headers and paragraphs */
-h1, h2, h3 {
-  margin: 10px 0;
-  text-align: center;
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
 }
 
-p {
-  text-align: center;
-  margin: 10px 0;
-}
-
-/* Add custom styles for quiz and navigation */
-.quiz-container {
-  background-color: #003366; /* Navy background */
-  padding: 20px;
+button {
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
 
-.quiz-container button {
-  margin: 10px 5px;
-  background-color: #FFD700; /* Yellow buttons */
-  color: #003366; /* Contrasting text */
-}
-
-.quiz-container button:hover {
-  background-color: #FFC300; /* Slightly lighter yellow on hover */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
 }

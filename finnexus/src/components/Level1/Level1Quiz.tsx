@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Define the prop types for the Level1Quiz component
-interface Level1QuizProps {
-  onLevelComplete: (level: string) => void; // onLevelComplete function passed as prop
-}
-
-const Level1Quiz: React.FC<Level1QuizProps> = ({ onLevelComplete }) => {
+const Level1Quiz: React.FC = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score, setScore] = useState(0);
@@ -60,7 +55,6 @@ const Level1Quiz: React.FC<Level1QuizProps> = ({ onLevelComplete }) => {
 
   const handleUnlockNextLevel = () => {
     if (score >= 4) {
-      onLevelComplete('Level 1'); // Notify parent that Level 1 is complete
       navigate('/FinEducation'); // Navigate to the next page
     } else {
       alert('Your score is not enough to unlock the next level.');

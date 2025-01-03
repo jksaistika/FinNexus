@@ -29,11 +29,11 @@ const FinEducation: React.FC = () => {
   const handleLevelClick = (level: number) => {
     setClickedLevel(level); // Track clicked level
     if (level === 1) {
-      navigate('/Level1/video');  // Navigate to Level 1 Video
+      navigate('/Level1video');  // Navigate to Level 1 Video
     } else if (level === 2) {
-      navigate('/Level2/video');  // Navigate to Level 2 Video
+      navigate('/Level2video');  // Navigate to Level 2 Video
     } else if (level === 3) {
-      navigate('/Level3/video');  // Navigate to Level 3 Video
+      navigate('/Level3video');  // Navigate to Level 3 Video
     }
   };
 
@@ -46,7 +46,6 @@ const FinEducation: React.FC = () => {
         fontFamily: 'Arial, sans-serif',
       }}
     >
-
       {/* Central Content Area */}
       <div
         style={{
@@ -179,6 +178,23 @@ const FinEducation: React.FC = () => {
             </ul>
           </div>
         </div>
+
+        {/* Back Button */}
+        <button
+          onClick={() => navigate('/HomePage')}  // Navigate back to HomePage
+          style={{
+            marginTop: '20px',
+            padding: '10px 20px',
+            fontSize: '16px',
+            backgroundColor: '#007BFF',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+          }}
+        >
+          Back to Home
+        </button>
       </div>
 
       {/* Full-width Footer */}

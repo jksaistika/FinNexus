@@ -135,7 +135,7 @@ const ViewPlans: React.FC = () => {
           ))}
         </tbody>
       </table>
-      <Link to="/micro-investment">
+      <Link to="/MicroInvestment">
         <button className="go-back-button">Go Back</button>
       </Link>
     </div>

@@ -12,16 +12,16 @@ const MicroInvestment: React.FC = () => {
       <div className="content-container">
         <p>Choose an option to proceed:</p>
         <div className="button-container">
-          <Link to="/view-plans">
+          <Link to="/ViewPlans">
             <button className="nav-button">View Plans</button>
           </Link>
-          <Link to="/register-plan">
+          <Link to="/RegisterPlan">
             <button className="nav-button">Register Plan</button>
           </Link>
         </div>
       </div>
       {/* Add the Go Back button */}
-      <Link to="/">
+      <Link to="/ViewPlans">
         <button className="go-back-button">Go Back</button>
       </Link>
     </div>

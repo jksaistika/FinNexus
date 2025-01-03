@@ -11,7 +11,7 @@ const Level3Instructions: React.FC = () => {
 
   const handleProceedClick = () => {
     if (isAgreed) {
-      navigate('/Level3/quiz'); // Proceed to quiz page if checkbox is checked
+      navigate('/Level3quiz'); // Proceed to quiz page if checkbox is checked
     } else {
       alert('You must agree to the instructions first.');
     }

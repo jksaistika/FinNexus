@@ -1,97 +1,88 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Correct way
+import { useNavigate } from 'react-router-dom';
 
-type BudgetType = 'daily' | 'weekly' | 'monthly';
+type BudgetType = 'daily' | 'weekly' | 'monthly' | 'yearly'; // Defining the BudgetType
 
 const Saving: React.FC = () => {
-  const [budget, setBudget] = useState<{ daily: number; weekly: number; monthly: number }>({
+  const [budget] = useState<{ daily: number; weekly: number; monthly: number; yearly: number }>({
+    daily: 1000,
+    weekly: 5000,
+    monthly: 20000,
+    yearly: 240000, // Yearly savings budget
+  });
+  const [totalExpenses] = useState(7000);
+  const [savings, setSavings] = useState<{ [key in BudgetType]: number }>({
     daily: 0,
     weekly: 0,
     monthly: 0,
+    yearly: 0,
   });
-  const [totalExpenses, setTotalExpenses] = useState(0);
-  const [savings, setSavings] = useState(0);
-  const [activeBudget, setActiveBudget] = useState<BudgetType>('daily');
 
-  const navigate = useNavigate(); // Use useNavigate for navigation in React Router v6
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const storedBudgets = ['daily', 'weekly', 'monthly'].reduce((acc, period) => {
-      const value = localStorage.getItem(`${period}Budget`);
-      if (value) acc[period as BudgetType] = parseFloat(value);
-      return acc;
-    }, {} as { daily: number; weekly: number; monthly: number });
-
-    const expenses = localStorage.getItem('expenses');
-    const total = expenses
-      ? JSON.parse(expenses).reduce((acc: number, { amount }: any) => acc + parseFloat(amount), 0)
-      : 0;
-
-    setBudget(storedBudgets);
-    setTotalExpenses(total);
-  }, []);
-
-  useEffect(() => {
-    setSavings(Object.values(budget).reduce((acc, val) => acc + val, 0) - totalExpenses);
+    // Calculate savings for each period
+    setSavings({
+      daily: budget.daily - totalExpenses,
+      weekly: budget.weekly - totalExpenses,
+      monthly: budget.monthly - totalExpenses,
+      yearly: budget.yearly - totalExpenses,
+    });
   }, [budget, totalExpenses]);
 
-  const handleBudgetChange = (period: BudgetType) => {
-    setActiveBudget(period);
-  };
-
   const handleNavigateBack = () => {
-    navigate('/budgeting'); // Navigate back to Budgeting page
+    navigate('/Budgeting');
   };
 
-  const handleNavigateNext = () => {
-    // Add navigation logic here if needed
+  const handleViewCharts = () => {
+    navigate('/charts'); // Navigate to the chart page
   };
 
   return (
-    <div style={styles.container}>
-      {/* Image Section on the left side */}
-      <div style={styles.imageContainer}>
-        <img src="img16.jpg" alt="Savings" style={styles.image} />
-      </div>
+    <div style={styles.pageContainer}>
+      <div style={styles.container}>
+        {/* Part 1: Image Section */}
+        <div style={styles.imageContainer}>
+          <img
+            src="img16.jpg" // Replace with the actual path to img16
+            alt="Savings"
+            style={styles.image}
+          />
+        </div>
 
-      {/* Content Section on the right side */}
-      <div style={styles.infoContainer}>
-        <h2 style={styles.heading}>Here is your Saving!</h2>
+        {/* Part 2: Content Container */}
+        <div style={styles.infoContainer}>
+          <h2 style={styles.heading}>Here is your Savings!</h2>
 
-        {/* Displaying daily, weekly, and monthly savings in rectangles vertically */}
-        <div style={styles.savingsContainer}>
-          {['daily', 'weekly', 'monthly'].map((period) => (
-            <div key={period} style={styles.savingsRectangle}>
-              <h3 style={styles.savingsText}>₹{budget[period as BudgetType] - totalExpenses}</h3> {/* Show remaining after expenses */}
+          {/* Savings Containers */}
+          <div style={styles.savingsWrapper}>
+            <div style={styles.savingsItem}>
+              <span style={styles.savingsLabel}>Daily Savings: </span>
+              <span style={styles.savingsAmount}>₹{savings.daily}</span>
             </div>
-          ))}
-        </div>
+            <div style={styles.savingsItem}>
+              <span style={styles.savingsLabel}>Weekly Savings: </span>
+              <span style={styles.savingsAmount}>₹{savings.weekly}</span>
+            </div>
+            <div style={styles.savingsItem}>
+              <span style={styles.savingsLabel}>Monthly Savings: </span>
+              <span style={styles.savingsAmount}>₹{savings.monthly}</span>
+            </div>
+            <div style={styles.savingsItem}>
+              <span style={styles.savingsLabel}>Yearly Savings: </span>
+              <span style={styles.savingsAmount}>₹{savings.yearly}</span>
+            </div>
+          </div>
 
-        {/* Display daily, weekly, monthly labels outside the savings container */}
-        <div style={styles.periodContainer}>
-          {['daily', 'weekly', 'monthly'].map((period) => (
-            <button
-              key={period}
-              style={styles.periodButton}
-              onClick={() => handleBudgetChange(period as BudgetType)} // Correct type assertion here
-            >
-              {period.charAt(0).toUpperCase() + period.slice(1)}
+          {/* Navigation and Chart buttons */}
+          <div style={styles.navigationButtons}>
+            <button style={styles.navButton} onClick={handleNavigateBack}>
+              Back to Budgeting
             </button>
-          ))}
-        </div>
-
-        {/* Total Expenses */}
-        <h2 style={styles.totalExpenses}>Total Expenses: ₹{totalExpenses}</h2>
-
-        {/* Message based on Savings */}
-        <p style={{ color: savings < 0 ? 'red' : 'green' }}>
-          {savings < 0 ? 'You have overspent your budget!' : 'You are within your budget!'}
-        </p>
-
-        {/* Navigation buttons */}
-        <div style={styles.navigationButtons}>
-          <button style={styles.navButton} onClick={handleNavigateBack}>Back to Budgeting</button>
-          <button style={styles.navButton} onClick={handleNavigateNext}>Next</button>
+            <button style={styles.navButton} onClick={handleViewCharts}>
+              View Charts
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -100,89 +91,60 @@ const Saving: React.FC = () => {
 
 // Styles
 const styles = {
-  container: {
+  pageContainer: {
     display: 'flex',
-    justifyContent: 'space-between', // Align content and image side by side
-    alignItems: 'center', // Vertically align the content in the middle
-    margin: '20px',
-    width: '90%', // Take full width of the parent container
-    height: 'auto',
-  },
-  imageContainer: {
-    width: '45%', // Image container takes 45% width
-    maxWidth: '150px',
-  },
-  image: {
-    width: '400%',
-    height: 'auto',
-    objectFit: 'cover' as 'cover', // Correctly typing objectFit
-    borderRadius: '8px',
-  },
-  infoContainer: {
-    width: '45%', // Content container takes 45% width
-    display: 'flex',
-    flexDirection: 'column' as 'column', // Correctly typing flexDirection here too
-    alignItems: 'center', // Center all content inside this container
     justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    backgroundColor: '#f8f9fa',
+  },
+  container: {
+    width: '80%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: '20px',
     backgroundColor: 'white',
-    color: 'black',
-    textAlign: 'center' as 'center', // Correcting textAlign type to 'center'
-    border: '4px solid black',
+    textAlign: 'center' as 'center',
     borderRadius: '8px',
-    height: 'auto',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+  },
+  infoContainer: {
+    width: '60%',
   },
   heading: {
     fontSize: '24px',
     fontWeight: 'bold',
     marginBottom: '20px',
   },
-  savingsContainer: {
+  savingsWrapper: {
+    marginBottom: '20px',
     display: 'flex',
-    flexDirection: 'column' as 'column', // Correctly typing flexDirection here too
-    justifyContent: 'center',
-    alignItems: 'center', // Center rectangles horizontally
-    gap: '15px',
-    marginBottom: '30px',
-  },
-  savingsRectangle: {
-    width: '100px',
-    height: '50px',
-    backgroundColor: 'transparent', // Transparent background
-    display: 'flex',
-    flexDirection: 'column' as 'column', // Correctly typing flexDirection here too
-    justifyContent: 'center',
+    flexDirection: 'column' as 'column',
     alignItems: 'center',
-    color: 'black', // Text color
-    borderRadius: '8px',
-    border: '2px solid black', // Optional: add border to define the rectangle
   },
-  savingsText: {
-    fontSize: '16px',
+  savingsItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    fontSize: '18px',
+    marginBottom: '10px',
+    width: '80%',
+    padding: '10px',
+    backgroundColor: '#e9ecef',
+    borderRadius: '8px',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+  },
+  savingsLabel: {
     fontWeight: 'bold',
   },
-  periodContainer: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    width: '100%',
-    marginBottom: '20px',
-  },
-  periodButton: {
-    padding: '10px',
-    fontSize: '14px',
-    cursor: 'pointer',
-    backgroundColor: 'lightgray',
-    border: 'none',
-    borderRadius: '8px',
-    transition: '0.3s',
-  },
-  totalExpenses: {
-    fontSize: '20px',
-    marginBottom: '15px',
+  savingsAmount: {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    color: 'green',
   },
   navigationButtons: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     width: '100%',
     marginTop: '20px',
   },
@@ -195,6 +157,22 @@ const styles = {
     border: 'none',
     borderRadius: '8px',
     transition: '0.3s',
+    margin: '0 10px',
+  },
+  imageContainer: {
+    width: '30%',
+    padding: '20px',
+    border: '2px solid #ddd',
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: '100%',
+    height: 'auto',
+    borderRadius: '8px',
   },
 };
 
