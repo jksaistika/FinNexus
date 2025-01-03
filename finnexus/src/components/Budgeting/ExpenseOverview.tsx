@@ -39,7 +39,7 @@ const ExpenseOverview: React.FC = () => {
 
   // Function to navigate back to TrackExpense page
   const handleBackClick = () => {
-    navigate('/TrackExpense'); // Navigate to the TrackExpense page
+    navigate('/TrackExpenses'); // Navigate to the TrackExpense page
   };
 
   return (
@@ -50,7 +50,7 @@ const ExpenseOverview: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '85vh',
-        marginTop: '0',
+        marginTop: '50px',
       }}
     >
       <div

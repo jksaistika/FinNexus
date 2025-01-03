@@ -34,13 +34,15 @@ const Level2Instructions: React.FC = () => {
       {/* Main container with black background */}
       <div
         style={{
-          backgroundColor: 'black',  // Black background for the container
-          color: 'white',            // White text inside the container
           width: '80%',
           maxWidth: '800px',
-          padding: '30px',
+          padding: '20px',
+          border: '2px solid black',  // Dark border for container
           borderRadius: '8px',
+          backgroundColor: 'fffff',   // Set container background to black
+          color: 'black',             // Set text color inside the container to white
           boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+          marginBottom: '20px',
         }}
       >
         <h2 style={{ fontSize: '36px' }}>Level 2 - Instructions</h2> {/* White title text */}
@@ -57,7 +59,7 @@ const Level2Instructions: React.FC = () => {
               listStyleType: 'decimal',
               marginBottom: '20px',
               fontSize: '18px',
-              color: 'white',
+              color: 'black',
               paddingLeft: '20px', // Added padding for a cleaner look
             }}
           >
@@ -72,7 +74,7 @@ const Level2Instructions: React.FC = () => {
 
           {/* Checkbox to Agree */}
           <div style={{ marginTop: '20px' }}>
-            <label style={{ color: 'white' }}>
+            <label style={{ color: 'black' }}>
               <input
                 type="checkbox"
                 checked={isAgreed}
@@ -92,7 +94,7 @@ const Level2Instructions: React.FC = () => {
             style={{
               padding: '8px 15px', // Reduced padding
               backgroundColor: isAgreed ? '#007BFF' : '#cccccc', // Blue if agreed, gray if not
-              color: 'white',
+              color: 'black',
               border: '2px solid white', // White border
               borderRadius: '5px',
               cursor: isAgreed ? 'pointer' : 'not-allowed',

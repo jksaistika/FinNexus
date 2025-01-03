@@ -141,7 +141,7 @@ const FinEducation: React.FC = () => {
                   color: 'black', // Text color set to black
                 }}
               >
-                Level 1
+                Basic
               </li>
               <li
                 onClick={() => handleLevelClick(2)}
@@ -157,7 +157,7 @@ const FinEducation: React.FC = () => {
                   color: 'black', // Text color set to black
                 }}
               >
-                Level 2
+                Medium
               </li>
               <li
                 onClick={() => handleLevelClick(3)}
@@ -173,7 +173,7 @@ const FinEducation: React.FC = () => {
                   color: 'black', // Text color set to black
                 }}
               >
-                Level 3
+                Advanced
               </li>
             </ul>
           </div>

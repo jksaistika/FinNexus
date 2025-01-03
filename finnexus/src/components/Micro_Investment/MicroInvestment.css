@@ -17,7 +17,7 @@
   
   .investment-image {
     width: 100%;
-    max-width: 600px; /* Adjust as needed */
+    max-width: 500px; /* Adjust as needed */
     height: auto;
     border-radius: 8px; /* Optional: for rounded corners */
   }

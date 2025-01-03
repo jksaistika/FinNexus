@@ -39,7 +39,7 @@ const SetBudget: React.FC = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '80vh',
+        height: '100vh',
         flexDirection: 'column', // Align content vertically
       }}
     >

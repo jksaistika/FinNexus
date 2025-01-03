@@ -17,15 +17,18 @@ import Level3Quiz from './components/Level3/Level3Quiz';
 import Budgeting from './components/Budgeting/Budgeting';
 import SetBudget from './components/Budgeting/SetBudget';
 import TrackExpenses from './components/Budgeting/TrackExpenses';
-import ExpenseTable from './components/Budgeting/ExpenseTable'
+import ExpenseTable from './components/Budgeting/ExpenseTable';
+import ExpenseOverview from './components/Budgeting/ExpenseOverview';
 import Savings from './components/Budgeting/Savings';
 import Charts from './components/Budgeting/Charts';
 import MicroInvestment from './components/Micro_Investment/MicroInvestment';
 import ViewPlans from './components/Micro_Investment/ViewPlans';
-import RegisterPlan from './components/Micro_Investment/RegisterPlan';
+import RegisterPlan from './components/RegisterPlan';
 import ScheduleTable from './components/ScheduleTable';
-import Schemes from './components/SchemesModule';
 import SchemesModule from './components/SchemesModule';
+import GovernmentSchemes from "./components/GovernmentSchemes";
+import NGOSchemes from "./components/NGOSchemes";
+
 const App: React.FC = () => {
   const isAuthenticated = true; // Replace with actual authentication logic
 
@@ -52,13 +55,16 @@ const App: React.FC = () => {
             <Route path="/SetBudget" element={<SetBudget />} />
             <Route path="/TrackExpenses" element={<TrackExpenses />} />
             <Route path="/ExpenseTable" element={<ExpenseTable />} />
+            <Route path="/ExpenseOverview" element={<ExpenseOverview />} />
             <Route path="/Savings" element={<Savings />} />
             <Route path="/charts" element={<Charts />} />
             <Route path="/MicroInvestment" element={<MicroInvestment />} />
             <Route path="/ViewPlans" element={<ViewPlans />} />
-            <Route path="/RegisterPlan" element={<RegisterPlan />} />
+            <Route path="/RegisterPlans" element={<RegisterPlan />} />
             <Route path="/ScheduleTable" element={<ScheduleTable />} />
             <Route path="/SchemesModule" element={<SchemesModule />} />
+            <Route path="/government-schemes" element={<GovernmentSchemes />} />
+            <Route path="/ngo-schemes" element={<NGOSchemes />} />
             {/* Add other routes here */}
 
             {/* Fallback Route */}

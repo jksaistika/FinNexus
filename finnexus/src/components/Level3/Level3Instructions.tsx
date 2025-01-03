@@ -21,7 +21,7 @@ const Level3Instructions: React.FC = () => {
     <div
       style={{
         backgroundColor: 'white', // White background for the page
-        color: 'black',            // Black text color
+        color: 'white',            // Black text color
         minHeight: '100vh',        // Full screen height
         display: 'flex',           // Flexbox for centering
         flexDirection: 'column',  // Column layout
@@ -41,8 +41,8 @@ const Level3Instructions: React.FC = () => {
           padding: '20px',
           border: '2px solid black',  // Dark border for container
           borderRadius: '8px',
-          backgroundColor: 'black',   // Set container background to black
-          color: 'white',             // Set text color inside the container to white
+          backgroundColor: 'fffff',   // Set container background to black
+          color: 'black',             // Set text color inside the container to white
           boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
           marginBottom: '20px',
         }}
@@ -59,7 +59,7 @@ const Level3Instructions: React.FC = () => {
         
         {/* Checkbox to Agree */}
         <div style={{ marginTop: '20px' }}>
-          <label style={{ color: 'white' }}>
+          <label style={{ color: 'black' }}>
             <input
               type="checkbox"
               checked={isAgreed}
@@ -79,7 +79,7 @@ const Level3Instructions: React.FC = () => {
           style={{
             padding: '8px 15px', // Reduced padding
             backgroundColor: isAgreed ? '#007BFF' : '#cccccc', // Blue if agreed, gray if not
-            color: 'white',
+            color: 'black',
             border: '2px solid white', // White border
             borderRadius: '5px',
             cursor: isAgreed ? 'pointer' : 'not-allowed',

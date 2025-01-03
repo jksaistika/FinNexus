@@ -173,7 +173,7 @@ For advanced learners, the module offers insights into tax planning, insurance, 
         {/* Government & NGO Schemes Section */}
         <section style={{ marginBottom: '50px' }}>
           <h2 style={{ color: '#001f3f', fontSize: '40px', fontWeight: 'bold', textAlign: 'left' }}>
-          <Link to="/schemes"> 5.Schemes</Link>
+          <Link to="/schemesModule"> 5.Schemes</Link>
             </h2>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {/* Image on the right */}

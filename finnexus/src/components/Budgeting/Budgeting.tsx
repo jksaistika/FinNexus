@@ -22,10 +22,10 @@ const Budgeting: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        minHeight: '70vh',
+        minHeight: '100vh',
         backgroundColor: 'white',
         padding: '20px',
-        gap: '-20px', // Reduced gap between the image and the container
+        gap: '20px', // Reduced gap between the image and the container
       }}
     >
       {/* Image Section (45% Width) */}
@@ -44,6 +44,7 @@ const Budgeting: React.FC = () => {
             width: '90%', // 90% of its container's width
             height: 'auto',
             borderRadius: '8px',
+            marginLeft:'100px',
           }}
         />
       </div>
@@ -62,6 +63,7 @@ const Budgeting: React.FC = () => {
           padding: '20px', // Reduced padding
           borderRadius: '15px',
           border: '4px solid black',
+          marginRight:'140px',
         }}
       >
         <h1 style={{ fontSize: '24px', marginBottom: '15px' }}>Budgeting Module</h1>
